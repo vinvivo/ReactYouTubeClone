@@ -28,10 +28,12 @@ class SearchBar extends Component {
     }
 
     render() {
+        // The value of the input from the Search Bar will be set to equal the value of the state. This is called a controlled input, which means the value of the input will mirror the state (vs. the value of the input changing the state).  I think of this like the developer sees the data/input before the user does.
         return (
             <div>
-                <input onChange={ event => this.setState({ term: event.target.value }) } />
-                Value of the input: {this.state.term}
+                <input 
+                    value = {this.state.term}
+                    onChange={ event => this.setState({ term: event.target.value }) } />
             </div>
         );
     }

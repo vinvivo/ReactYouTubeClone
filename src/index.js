@@ -4,8 +4,15 @@
 import React from 'react';  // find a module named 'react' and import it under the variable name 'React"
 import ReactDOM from 'react-dom';   // react-dom is the module that puts the generated HTML into the DOM, so need to use the methods from that module to put things in the DOM.
 import SearchBar from './components/search_bar';    // Must provide relative path reference.
+import YTSearch from 'youtube-api-search';
 
 const API_KEY = 'AIzaSyDvCpJsq5ihWkaYJOAdnCF9SPlNCt21-jc';
+
+YTSearch(
+    {key: API_KEY, term: 'surfboards'}, function(data) {
+        console.log(data);
+    }
+);
 
 // Create a new component; this component should produce some HTML.
 const App = () => {
