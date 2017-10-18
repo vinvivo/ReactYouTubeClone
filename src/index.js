@@ -19,26 +19,23 @@ class App extends Component {
             selectedVideo: null
         };
 
-/*        YTSearch(
-            {key: API_KEY, term: 'surfboards'}, function(data) {
-                this.setState({ searchResults: data });
-            }
-        );
-*/
-// Can refactor the above to the following iff the name of the key is identical to the name of the value (i.e., this.setState({ searchResults: searchResults }) --> this.setState({ searchResults }) )
-        YTSearch(
-            {key: API_KEY, term: 'surfboards'}, (searchResults) => {
-                this.setState({
-                    searchResults: searchResults,
-                    selectedVideo: searchResults[0]
-                });
-            }
-        );
+        this.videoSearch('surfboards');
     }
+
+// New method for searching for videos called 'videoSearch' that takes a parameter called 'term'.
+videoSearch(term) {
+    YTSearch( {key: API_KEY, term: term}, (searchResults) => {
+        this.setState({
+            searchResults: searchResults,
+            selectedVideo: searchResults[0]
+        });
+    });
+}
+
     render() {
         return (
             <div>
-                <SearchBar />
+                <SearchBar onSearchTermChange={ term => this.videoSearch(term) } />
                 <VideoDetail searchResults={this.state.selectedVideo} />
                 <VideoList
                     // onVideoSelect only updates App's state--it updates the selectedVideo variable. This is passed as a property into VideoList child component...
