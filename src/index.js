@@ -4,6 +4,7 @@ import React, { Component } from 'react';  // find a module named 'react' and im
 import ReactDOM from 'react-dom';   // react-dom is the module that puts the generated HTML into the DOM, so need to use the methods from that module to put things in the DOM.
 import SearchBar from './components/search_bar';    // Must provide relative path reference.
 import YTSearch from 'youtube-api-search';
+import VideoList from './components/video_list';
 
 const API_KEY = 'AIzaSyDvCpJsq5ihWkaYJOAdnCF9SPlNCt21-jc';
 
@@ -31,8 +32,11 @@ class App extends Component {
         return (
             <div>
                 <SearchBar />
+                <VideoList searchResults={this.state.searchResults} />
             </div>
-        );  // <div></div> tags *looks* like JS, but it is actually JSX, which is transpiled by webpack and babel to HTML.
+        );
+        // <div></div> tags *looks* like JS, but it is actually JSX, which is transpiled by webpack and babel to HTML.
+        // "searchResults={this.state.searchResults} is a means of 'passing props' in React. We're passing prop 'searchResults' from the parent App to the child VideoList."
     }
 }
 
