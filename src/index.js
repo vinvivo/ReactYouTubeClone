@@ -14,7 +14,10 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { searchResults: [] };
+        this.state = {
+            searchResults: [],
+            selectedVideo: null
+        };
 
 /*        YTSearch(
             {key: API_KEY, term: 'surfboards'}, function(data) {
@@ -22,10 +25,13 @@ class App extends Component {
             }
         );
 */
-// Can refactor the above to the following iff the name of the key is identical to the name of the value (i.e., this.setState({ searchResults: searchResults }) )
+// Can refactor the above to the following iff the name of the key is identical to the name of the value (i.e., this.setState({ searchResults: searchResults }) --> this.setState({ searchResults }) )
         YTSearch(
             {key: API_KEY, term: 'surfboards'}, (searchResults) => {
-                this.setState({ searchResults });
+                this.setState({
+                    searchResults: searchResults,
+                    selectedVideo: searchResults[0]
+                });
             }
         );
     }
@@ -33,8 +39,11 @@ class App extends Component {
         return (
             <div>
                 <SearchBar />
-                <VideoDetail searchResults={this.state.searchResults[0]} />
-                <VideoList searchResults={this.state.searchResults} />
+                <VideoDetail searchResults={this.state.selectedVideo} />
+                <VideoList
+                    // onVideoSelect only updates App's state--it updates the selectedVideo variable. This is passed as a property into VideoList child component...
+                    onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
+                    searchResults={this.state.searchResults} />
             </div>
         );
         // <div></div> tags *looks* like JS, but it is actually JSX, which is transpiled by webpack and babel to HTML.
