@@ -1,26 +1,39 @@
 /* jshint esversion: 6 */
-// AIzaSyDvCpJsq5ihWkaYJOAdnCF9SPlNCt21-jc
 
-import React from 'react';  // find a module named 'react' and import it under the variable name 'React"
+import React, { Component } from 'react';  // find a module named 'react' and import it under the variable name 'React"
 import ReactDOM from 'react-dom';   // react-dom is the module that puts the generated HTML into the DOM, so need to use the methods from that module to put things in the DOM.
 import SearchBar from './components/search_bar';    // Must provide relative path reference.
 import YTSearch from 'youtube-api-search';
 
 const API_KEY = 'AIzaSyDvCpJsq5ihWkaYJOAdnCF9SPlNCt21-jc';
 
-YTSearch(
-    {key: API_KEY, term: 'surfboards'}, function(data) {
-        console.log(data);
-    }
-);
-
 // Create a new component; this component should produce some HTML.
-const App = () => {
-    return (
-        <div>
-            <SearchBar />
-        </div>
-    );  // <div></div> tags *looks* like JS, but it is actually JSX, which is transpiled by webpack and babel to HTML.
+class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { searchResults: [] };
+
+/*        YTSearch(
+            {key: API_KEY, term: 'surfboards'}, function(data) {
+                this.setState({ searchResults: data });
+            }
+        );
+*/
+// Can refactor the above to the following iff the name of the key is identical to the name of the value (i.e., this.setState({ searchResults: searchResults }) )
+        YTSearch(
+            {key: API_KEY, term: 'surfboards'}, (searchResults) => {
+                this.setState({ searchResults });
+            }
+        );
+    }
+    render() {
+        return (
+            <div>
+                <SearchBar />
+            </div>
+        );  // <div></div> tags *looks* like JS, but it is actually JSX, which is transpiled by webpack and babel to HTML.
+    }
 }
 
 // Take this component's generated HTML and put it in the DOM.
