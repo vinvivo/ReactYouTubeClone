@@ -18,8 +18,16 @@ class SearchBar extends Component {   // Create a class 'SearchBar' and give it 
 */
 
 class SearchBar extends Component {
+    // For class-based components, this is how to initialize "state"
+    constructor(props) {
+        super(props);
+
+        // this.state = object
+        this.state = { term: '' };  // Initializing a property 'term' (aka search term) to keep track of in state. It will start off as an empty string '' and get modified onInputChange.
+    }
+
     render() {
-        return <input onChange = { event => console.log(event.target.value) } />;
+        return <input onChange = { event => this.setState({ term: event.target.value })} />;
     }
 }
 
