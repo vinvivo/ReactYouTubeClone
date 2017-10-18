@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';   // react-dom is the module that puts the gen
 import SearchBar from './components/search_bar';    // Must provide relative path reference.
 import YTSearch from 'youtube-api-search';
 import VideoList from './components/video_list';
+import VideoDetail from './components/video_detail';
 
 const API_KEY = 'AIzaSyDvCpJsq5ihWkaYJOAdnCF9SPlNCt21-jc';
 
@@ -32,6 +33,7 @@ class App extends Component {
         return (
             <div>
                 <SearchBar />
+                <VideoDetail searchResults={this.state.searchResults[0]} />
                 <VideoList searchResults={this.state.searchResults} />
             </div>
         );
