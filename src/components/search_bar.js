@@ -22,12 +22,18 @@ class SearchBar extends Component {
     constructor(props) {
         super(props);
 
-        // this.state = object
-        this.state = { term: '' };  // Initializing a property 'term' (aka search term) to keep track of in state. It will start off as an empty string '' and get modified onInputChange.
+        // Initializing a property 'term' (aka search term) to keep track of in state. It will start off as an empty string '' and get modified onInputChange.
+        // Syntax:  this.state = object
+        this.state = { term: '' };
     }
 
     render() {
-        return <input onChange = { event => this.setState({ term: event.target.value })} />;
+        return (
+            <div>
+                <input onChange={ event => this.setState({ term: event.target.value }) } />
+                Value of the input: {this.state.term}
+            </div>
+        );
     }
 }
 
